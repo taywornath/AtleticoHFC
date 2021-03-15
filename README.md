@@ -1,7 +1,7 @@
 # AtleticoHFC
 Atletico HFC App
 
-Criação do projeto inicial de app, atendendo aos requisitos da atividade proposta para a disciplina de Computação par Dispositivos Móveis, conforme apresentado abaixo:
+Criação do projeto inicial de app, atendendo aos requisitos da atividade proposta na disciplina de Computação para Dispositivos Móveis, conforme apresentado abaixo:
 
 Projeto com 3 activities:
 - Splash screen
