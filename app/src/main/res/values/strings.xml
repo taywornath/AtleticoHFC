@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AtleticoHFC</string>
+    <string name="textLogin" translatable="false">Email:</string>
+    <string name="textSenha">Digite a sua senha:</string>
+    <string name="textoBotaoLogin" translatable="false">Login</string>
+    <string name="textoBemVindo">Bem vindo!</string>
+    <string name="textoBtnVoltar">Voltar pra tela de Login</string>
+    <string name="textoVoltarSplash">Voltar para Splash Screen</string>
+</resources>

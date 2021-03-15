@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/meOutroAzul"
+    tools:context=".TelaPrincipal">
+
+    <TextView
+        android:id="@+id/textViewBemvindo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textoBemVindo"
+        android:textColor="@color/Branco"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.254" />
+
+    <Button
+        android:id="@+id/btnVoltarLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textoBtnVoltar"
+        app:backgroundTint="@color/MeuOutroVermelho"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBemvindo"
+        app:layout_constraintVertical_bias="0.438" />
+
+    <Button
+        android:id="@+id/btnVoltaSplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textoVoltarSplash"
+        app:backgroundTint="@color/MeuOutroVermelho"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnVoltarLogin"
+        app:layout_constraintVertical_bias="0.27" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

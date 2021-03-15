@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="meuAzul">#98D2EB</color>
+    <color name="meOutroAzul">#13293D</color>
+    <color name="Branco">#FFFFFF</color>
+    <color name="Vermelho">#FD1E1E</color>
+    <color name="MeuOutroVermelho">#E0483D</color>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AtleticoHFC</string>
+    <string name="textSenha">Type your password:</string>
+    <string name="textoBemVindo">Welcome!</string>
+    <string name="textoBtnVoltar">Back to login</string>
+    <string name="textoVoltarSplash">Back to Splash Screen</string>
+</resources>
