@@ -20,7 +20,7 @@ public class TelaSplash extends AppCompatActivity {
         // Vincula o botão da tela ao botão da Classe
         botaoLoginSplash = (Button) findViewById(R.id.btnLoginSplash);
 
-        // Atribui o evento de click ao botao e a sua ação após o clique
+        // Atribui o evento de click ao botão e a sua ação após o clique
         botaoLoginSplash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
