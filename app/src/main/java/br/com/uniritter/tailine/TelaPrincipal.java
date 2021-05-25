@@ -11,6 +11,7 @@ public class TelaPrincipal extends AppCompatActivity {
 
     private Button voltarLogin;
     private Button voltarSplash;
+    private Button cadastrarMembro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class TelaPrincipal extends AppCompatActivity {
 
         voltarLogin = (Button) findViewById(R.id.btnVoltarLogin);
         voltarSplash = (Button) findViewById(R.id.btnVoltaSplash);
+        cadastrarMembro = (Button) findViewById(R.id.btnCadastrarMembro);
 
         voltarLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +35,11 @@ public class TelaPrincipal extends AppCompatActivity {
                 voltaParaTelaSplash();
             }
         });
+
+        cadastrarMembro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { cadastrarNovoMembro(); }
+        });
     }
 
     private void voltaParaTelaDeLogin() {
@@ -42,6 +49,11 @@ public class TelaPrincipal extends AppCompatActivity {
 
     private void voltaParaTelaSplash() {
         Intent intent = new Intent(this, TelaSplash.class);
+        startActivity(intent);
+    }
+
+    private void cadastrarNovoMembro() {
+        Intent intent = new Intent(this, CadastrarMembro.class);
         startActivity(intent);
     }
 
