@@ -6,4 +6,7 @@
     <string name="textoBemVindo">Bem vindo!</string>
     <string name="textoBtnVoltar">Voltar pra tela de Login</string>
     <string name="textoVoltarSplash">Voltar para Splash Screen</string>
+    <string name="textoBtnCadatrar">Cadastrar</string>
+    <string name="textoBtnNovoMembro">Cadastrar novo membro</string>
+    <string name="title_activity_new_member" translatable="false">Cadastrar novo membro</string>
 </resources>
