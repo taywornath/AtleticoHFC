@@ -1,16 +1,22 @@
 package br.com.uniritter.tailine;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
 public class TelaPrincipal extends AppCompatActivity {
 
-    private Button voltarLogin;
-    private Button voltarSplash;
+
+    private Button logout;
+    private Button ranking;
     private Button cadastrarMembro;
 
     @Override
@@ -18,44 +24,43 @@ public class TelaPrincipal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_principal);
 
-        voltarLogin = (Button) findViewById(R.id.btnVoltarLogin);
-        voltarSplash = (Button) findViewById(R.id.btnVoltaSplash);
+        logout = (Button) findViewById(R.id.btnLogout);
+        ranking = (Button) findViewById(R.id.btnRanking);
         cadastrarMembro = (Button) findViewById(R.id.btnCadastrarMembro);
 
-        voltarLogin.setOnClickListener(new View.OnClickListener() {
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                voltaParaTelaDeLogin();
-            }
-        });
-
-        voltarSplash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                voltaParaTelaSplash();
-            }
+            public void onClick(View v) { logout(); }
         });
 
         cadastrarMembro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { cadastrarNovoMembro(); }
         });
+
+        ranking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){ }
+        });
     }
 
-    private void voltaParaTelaDeLogin() {
-        Intent intent = new Intent(this, TelaLogin.class);
-        startActivity(intent);
-    }
+    private void logout() {
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) { voltaLogin(); }
+                });    }
 
-    private void voltaParaTelaSplash() {
-        Intent intent = new Intent(this, TelaSplash.class);
-        startActivity(intent);
-    }
+    private void rankingJogadores() { }
 
     private void cadastrarNovoMembro() {
         Intent intent = new Intent(this, CadastrarMembro.class);
         startActivity(intent);
     }
 
+    private void voltaLogin() {
+        Intent intent = new Intent(this, TelaLogin.class);
+        startActivity(intent);
+    }
 
 }
