@@ -1,78 +1,92 @@
 package br.com.uniritter.tailine;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class TelaLogin extends AppCompatActivity {
 
-    private EditText editEmail;
-    private EditText editSenha;
+    private static final int RC_SIGN_IN = 123;
     private Button botaoLogin;
 
-    private String email = "taywornath@gmail.com";
-    private String senha = "123";
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editEmail = findViewById(R.id.editTextEmail);
-        editSenha = findViewById(R.id.editTextPassword);
+        mAuth = FirebaseAuth.getInstance();
         botaoLogin = findViewById(R.id.btnLogin);
-
-
-        try {
-            SQLiteDatabase db = openOrCreateDatabase("app", MODE_PRIVATE, null);
-
-            //Criar tabela
-            db.execSQL("CREATE TABLE IF NOT EXISTS usuario (id INTEGER PRIMARY KEY AUTOINCREMENT, usuario VARCHAR, senha VARCHAR, tipoUsuario INT)");
-            db.execSQL("CREATE TABLE IF NOT EXISTS tipoUsuario (id INTEGER PRIMARY KEY, tipo VARCHAR)");
-            db.execSQL("INSERT INTO tipoUsuario(id, tipo) VALUES (1, 'Administrador')");
-            db.execSQL("INSERT INTO tipoUsuario(id, tipo) VALUES (2, 'Membro')");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
 
         botaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                List<AuthUI.IdpConfig> providers = Arrays.asList(
+                        new AuthUI.IdpConfig.EmailBuilder().build()
+                );
 
-                // Valida se os campos que são preenchidos estão vazios e se são iguais aos dados de login
-                if (!TextUtils.isEmpty(editEmail.getText()) && !TextUtils.isEmpty(editSenha.getText())) {
-                    if (TextUtils.equals(editEmail.getText(), email) && TextUtils.equals(editSenha.getText(), senha)) {
-                        // Mostrar se login deu certo
-                        Toast.makeText(getApplicationContext(), "Login efetuado com sucesso!", Toast.LENGTH_LONG).show();
-
-                        //Abrir o banco
-                        SQLiteDatabase db = openOrCreateDatabase("app", MODE_PRIVATE, null);
-
-                        //Pegar dados do input do usuario
-                        db.execSQL("INSERT INTO usuarios(usuario, senha, tipo) VALUES ("+ editEmail.getText() +", " +editSenha.getText() +", 1);");
-
-                        fazLogin();
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(), "Preencha os campos", Toast.LENGTH_LONG).show();
-                }
+                // Create and launch sign-in intent
+                startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setAvailableProviders(providers)
+                                .build(),
+                        RC_SIGN_IN);
             }
         });
-
-
     }
 
-    private void fazLogin() {
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            reload();
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            IdpResponse response = IdpResponse.fromResultIntent(data);
+
+            if (resultCode == RESULT_OK) {
+                // Successfully signed in
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//                Toast.makeText(this, "Login realizado com sucesso" + FirebaseServices.getFirebaseUser().getDisplayName(),
+//                        Toast.LENGTH_LONG).show();
+
+                gotoTelaPrincipal();
+
+            } else {
+                //Login falhou
+                Toast.makeText(this, "Login falhou", Toast.LENGTH_LONG).show();
+
+            }
+        }
+    }
+
+    public void gotoTelaPrincipal(){
         Intent intent = new Intent(this, TelaPrincipal.class);
         startActivity(intent);
     }
+
+    private void reload() { }
 }
+
+
