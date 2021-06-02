@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "773933449341",
+    "project_id": "atletico-hfc",
+    "storage_bucket": "atletico-hfc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773933449341:android:fb16388da75c1e8664b114",
+        "android_client_info": {
+          "package_name": "br.com.uniritter.tailine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773933449341-dfa5f8si8bd5p41jcqb2gef0k2578hee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADKXdL1_9Oq20mJGSqfUhtpa_NkwVEbBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773933449341-dfa5f8si8bd5p41jcqb2gef0k2578hee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
