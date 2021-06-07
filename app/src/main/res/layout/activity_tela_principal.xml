@@ -73,4 +73,18 @@
         app:layout_constraintTop_toBottomOf="@+id/btnRanking"
         app:layout_constraintVertical_bias="0.147" />
 
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="182dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="47dp"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnRanking"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBemvindo"
+        app:layout_constraintVertical_bias="0.128" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
