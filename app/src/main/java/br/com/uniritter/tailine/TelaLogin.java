@@ -22,6 +22,7 @@ public class TelaLogin extends AppCompatActivity {
     private Button botaoLogin;
 
     private FirebaseAuth mAuth;
+    private FirebaseUser user;
 
 
     @Override
@@ -29,8 +30,16 @@ public class TelaLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        user = FirebaseAuth.getInstance().getCurrentUser();
+//        if (user != null) {
+//            gotoTelaPrincipal();
+//        } else {
+//            // No user is signed in
+//        }
+
         mAuth = FirebaseAuth.getInstance();
         botaoLogin = findViewById(R.id.btnLogin);
+
 
         botaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
