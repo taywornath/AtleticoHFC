@@ -84,6 +84,11 @@ public class CadastrarMembro extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void voltaParaLogin() {
+        Intent intent = new Intent(this, TelaLogin.class);
+        startActivity(intent);
+    }
+
     public void cadastraNovoUsuario(String id, int tipo){
         //  salva os dados do novo usuario na collection usuarios
         Map<String, Object> user = new HashMap<>();
@@ -118,6 +123,7 @@ public class CadastrarMembro extends AppCompatActivity {
                             cadastraNovoUsuario(mAuth.getUid(), tipoUsuario);
                             Toast.makeText(CadastrarMembro.this, "Cadastro realizado com sucesso.",
                                     Toast.LENGTH_SHORT).show();
+                            voltaParaLogin();
 
                         } else {
                             // If sign in fails, display a message to the user.
