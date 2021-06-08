@@ -4,21 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/meOutroAzul"
+    android:background="@color/Branco"
     tools:context=".TelaPrincipal">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="272dp"
+        android:layout_height="253dp"
+        android:contentDescription="imgAtletico"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.418"
+        app:srcCompat="@drawable/atletico" />
 
     <TextView
         android:id="@+id/textViewBemvindo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/textoBemVindo"
-        android:textColor="@color/Branco"
+        android:textColor="@color/meOutroAzul"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.254" />
+        app:layout_constraintVertical_bias="0.088" />
 
     <Button
         android:id="@+id/btnVoltarLogin"
@@ -28,10 +41,10 @@
         app:backgroundTint="@color/MeuOutroVermelho"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewBemvindo"
-        app:layout_constraintVertical_bias="0.438" />
+        app:layout_constraintVertical_bias="0.714" />
 
     <Button
         android:id="@+id/btnVoltaSplash"
@@ -41,22 +54,21 @@
         app:backgroundTint="@color/MeuOutroVermelho"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnVoltarLogin"
-        app:layout_constraintVertical_bias="0.205" />
+        app:layout_constraintVertical_bias="0.576" />
 
     <Button
         android:id="@+id/btnCadastrarMembro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="@string/textoBtnNovoMembro"
         app:backgroundTint="@color/MeuOutroVermelho"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnVoltaSplash"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnVoltaSplash"
-        app:layout_constraintVertical_bias="0.39" />
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
