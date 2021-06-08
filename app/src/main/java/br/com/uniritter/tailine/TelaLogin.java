@@ -79,7 +79,6 @@ public class TelaLogin extends AppCompatActivity {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //                Toast.makeText(this, "Login realizado com sucesso" + FirebaseServices.getFirebaseUser().getDisplayName(),
 //                        Toast.LENGTH_LONG).show();
-
                 gotoTelaPrincipal();
 
             } else {

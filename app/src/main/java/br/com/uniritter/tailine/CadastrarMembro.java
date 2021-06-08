@@ -123,7 +123,7 @@ public class CadastrarMembro extends AppCompatActivity {
                             cadastraNovoUsuario(mAuth.getUid(), tipoUsuario);
                             Toast.makeText(CadastrarMembro.this, "Cadastro realizado com sucesso.",
                                     Toast.LENGTH_SHORT).show();
-                            voltaParaLogin();
+                            voltaParaMenu();
 
                         } else {
                             // If sign in fails, display a message to the user.
