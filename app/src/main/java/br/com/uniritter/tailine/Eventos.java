@@ -19,7 +19,7 @@ public class Eventos extends AppCompatActivity {
         setContentView(R.layout.activity_eventos);
 
         frequentadores = findViewById(R.id.txt_frequentadores);
-        eventos =findViewById(R.id.txt_eventos);
+        eventos =findViewById(R.id.textWelcomeLogin);
         maiores = findViewById(R.id.btn_maiores);
         menores = findViewById(R.id.btn_menores);
         logo = findViewById(R.id.img_eventos);

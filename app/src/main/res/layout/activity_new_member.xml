@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/meOutroAzul"
+    android:background="@color/Branco"
     tools:context=".CadastrarMembro">
 
 
@@ -39,7 +39,7 @@
         android:ems="10"
         android:hint="@string/hint_nome"
         android:inputType="textPersonName"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/meOutroAzul"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
@@ -55,7 +55,7 @@
         android:ems="10"
         android:hint="@string/hint_senha"
         android:inputType="textPassword"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/meOutroAzul"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
@@ -71,7 +71,7 @@
         android:ems="10"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/meOutroAzul"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
@@ -94,14 +94,14 @@
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="@string/textRadiusMembro"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/meOutroAzul" />
 
         <RadioButton
             android:id="@+id/radAdmin"
             android:layout_width="130dp"
             android:layout_height="50dp"
             android:text="@string/textRadiusAdmin"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/meOutroAzul" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

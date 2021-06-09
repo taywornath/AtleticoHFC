@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.66" />
 
     <TextView
-        android:id="@+id/txt_eventos"
+        android:id="@+id/textWelcomeLogin"
         android:layout_width="138dp"
         android:layout_height="48dp"
         android:text="@string/eventos"
@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_eventos"
+        app:layout_constraintTop_toBottomOf="@+id/textWelcomeLogin"
         app:layout_constraintVertical_bias="0.41"
         tools:src="@drawable/atletico"
         tools:srcCompat="@drawable/atletico" />

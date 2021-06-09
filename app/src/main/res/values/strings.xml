@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">AtleticoHFC</string>
-    <string name="textWelcomeLogin">Faça parte deste time!</string>
+    <string name="textWelcomeLogin">Você faz parte deste time!</string>
     <string name="textoBotaoLogin">Entrar</string>
     <string name="textoBemVindo">Bem vindo!</string>
+    <string name="text_username"></string>
     <string name="txtRanking">Ranking de jogadores</string>
     <string name="btnEventos">Calendário de Eventos</string>
-    <string name="textBtnNovoMembro">Cadastrar novo membro</string>
+    <string name="textBtnNovoMembro">Cadastrar Membro</string>
+    <string name="textBtnNovoEvento">Cadastrar Evento</string>
     <string name="txtLogout">Sair</string>
     <string name="hint_nome">Nome completo</string>
     <string name="hint_senha">Senha</string>

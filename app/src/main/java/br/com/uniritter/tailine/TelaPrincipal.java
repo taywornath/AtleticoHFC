@@ -30,7 +30,7 @@ public class TelaPrincipal extends AppCompatActivity {
         ranking = (Button) findViewById(R.id.btnRanking);
         cadastrarMembro = (Button) findViewById(R.id.btnCadastrarMembro);
         eventos = (Button) findViewById(R.id.btnEventos);
-        username = findViewById(R.id.username);
+        username = findViewById(R.id.text_username);
 
         username.setText(getUserName());
 

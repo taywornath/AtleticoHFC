@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -34,8 +33,6 @@ public class TelaSplash extends AppCompatActivity {
 
         // Localiza os componentes da tela
         layout = (ConstraintLayout) findViewById(R.id.tela_splash);
-
-
 
         // Aplica a animação definida no Layout
         AlphaAnimation animation = new AlphaAnimation(0.0f, 1.0f);
