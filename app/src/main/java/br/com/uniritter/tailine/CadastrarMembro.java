@@ -53,8 +53,8 @@ public class CadastrarMembro extends AppCompatActivity {
         admin = findViewById(R.id.radAdmin);
         membro = findViewById(R.id.radMembro);
         btnCadastro = findViewById(R.id.btnRegister);
-
         btnCadastro.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(editNome.getText()) && !TextUtils.isEmpty(editEmail.getText()) && !TextUtils.isEmpty(editSenha.getText()) ) {

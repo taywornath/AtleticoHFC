@@ -6,20 +6,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import br.com.uniritter.tailine.models.TipoUsuario;
+import br.com.uniritter.tailine.models.Usuario;
 import br.com.uniritter.tailine.services.FirebaseServices;
 
 public class TelaPrincipal extends AppCompatActivity {
 
     private Button logout, ranking, cadastrarMembro, eventos;
     private TextView username;
+    private final FirebaseFirestore db = FirebaseServices.getFirebaseFirestoreInstance();
+    TipoUsuario tipoUsuario;
+    Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,27 +41,62 @@ public class TelaPrincipal extends AppCompatActivity {
         cadastrarMembro = (Button) findViewById(R.id.btnCadastrarMembro);
         eventos = (Button) findViewById(R.id.btnEventos);
         username = findViewById(R.id.text_username);
-
         username.setText(getUserName());
+
+
+
+
+        // busca o tipo do usuario no firebase para validar se vai habilitar ou não os botões
+        DocumentReference docRef = db.collection("tipoUsuario").document("gnFS3L7ztIzrqCaBOvTI");
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                tipoUsuario = documentSnapshot.toObject(TipoUsuario.class);
+            }
+        });
+
+
+        // busca o usuario do banco
+        DocumentReference docReference = db.collection("usuarios").document("taywornath@gmail.com");
+        docReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                usuario = documentSnapshot.toObject(Usuario.class);
+            }
+        });
+
+        //se usuario não é admin, esconde os botões de cadastro de evento e membro
+        if(tipoUsuario.admin != usuario.getTipoUsuario()) {
+            eventos.setVisibility(View.GONE);
+            cadastrarMembro.setVisibility(View.GONE);
+        }
+
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { logout(); }
+            public void onClick(View v) {
+                logout();
+            }
         });
 
         cadastrarMembro.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { cadastrarNovoMembro(); }
+            public void onClick(View v) {
+                cadastrarNovoMembro();
+            }
         });
 
         ranking.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){ }
+            public void onClick(View v) {
+            }
         });
 
         eventos.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){ eventos(); }
+            public void onClick(View v) {
+                eventos();
+            }
         });
     }
 
@@ -60,7 +105,9 @@ public class TelaPrincipal extends AppCompatActivity {
         AuthUI.getInstance()
                 .signOut(this)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    public void onComplete(@NonNull Task<Void> task) { voltaLogin(); }
+                    public void onComplete(@NonNull Task<Void> task) {
+                        voltaLogin();
+                    }
                 });
     }
 
@@ -71,10 +118,11 @@ public class TelaPrincipal extends AppCompatActivity {
         if (user != null) {
             name = user.getDisplayName();
         }
-        return name;
+        return user.getDisplayName();
     }
 
-    private void rankingJogadores() { }
+    private void rankingJogadores() {
+    }
 
     private void cadastrarNovoMembro() {
         Intent intent = new Intent(this, CadastrarMembro.class);
@@ -90,7 +138,6 @@ public class TelaPrincipal extends AppCompatActivity {
         Intent intent = new Intent(this, Eventos.class);
         startActivity(intent);
     }
-
 
 
 }
