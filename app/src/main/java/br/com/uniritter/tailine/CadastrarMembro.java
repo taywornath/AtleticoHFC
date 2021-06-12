@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -53,12 +54,12 @@ public class CadastrarMembro extends AppCompatActivity {
         admin = findViewById(R.id.radAdmin);
         membro = findViewById(R.id.radMembro);
         btnCadastro = findViewById(R.id.btnRegister);
-        btnCadastro.setOnClickListener(new View.OnClickListener() {
 
+        btnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(editNome.getText()) && !TextUtils.isEmpty(editEmail.getText()) && !TextUtils.isEmpty(editSenha.getText()) ) {
-                    // verifica se o tipo de usuário foi selecionado
+                    // Quando tipoUsuario estiver ok, verificar através dele
                     if (membro.isChecked()){
                         tipoUsuario = 1;
                     } else if (admin.isChecked()){
@@ -89,28 +90,15 @@ public class CadastrarMembro extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void cadastraNovoUsuario(String id, int tipo){
-        //  salva os dados do novo usuario na collection usuarios
+    public void cadastraNovoUsuario(String id, int tipo, String nome){
+        CollectionReference usuarios = db.collection("usuarios");
+
+        // Cria novo documento, cujo ID é o mesmo que o UID do usuário
         Map<String, Object> user = new HashMap<>();
         user.put("UID", id);
         user.put("tipoUsuario", tipo);
-
-        // Adiciona o novo usuário na collection usuarios
-        db.collection("usuarios")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "Cadastro efetuado com sucesso! \n " + documentReference.getId());
-                        reload();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Erro no cadastro. Tente novamente.", e);
-                    }
-                });
+        user.put("nome", nome);
+        usuarios.document(id).set(user);
     }
 
     private void createAccount(String email, String password) {
@@ -120,7 +108,7 @@ public class CadastrarMembro extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail:success");
-                            cadastraNovoUsuario(mAuth.getUid(), tipoUsuario);
+                            cadastraNovoUsuario(mAuth.getUid(), tipoUsuario, editNome.getText().toString());
                             Toast.makeText(CadastrarMembro.this, "Cadastro realizado com sucesso.",
                                     Toast.LENGTH_SHORT).show();
                             voltaParaMenu();
@@ -136,5 +124,4 @@ public class CadastrarMembro extends AppCompatActivity {
     }
 
     public void reload() { }
-
 }

@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,11 +26,15 @@ import br.com.uniritter.tailine.services.FirebaseServices;
 
 public class TelaPrincipal extends AppCompatActivity {
 
-    private Button logout, ranking, cadastrarMembro, eventos;
+    private Button logout, ranking, cadastrarMembro, eventos, perfil;
     private TextView username;
+
     private final FirebaseFirestore db = FirebaseServices.getFirebaseFirestoreInstance();
-    TipoUsuario tipoUsuario;
-    Usuario usuario;
+    private final FirebaseUser user = FirebaseServices.getFirebaseAuthInstance().getCurrentUser();
+
+    private TipoUsuario tipoUsuario;
+    private Usuario usuario = new Usuario(user.getDisplayName(), user.getEmail(), user);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +45,14 @@ public class TelaPrincipal extends AppCompatActivity {
         ranking = (Button) findViewById(R.id.btnRanking);
         cadastrarMembro = (Button) findViewById(R.id.btnCadastrarMembro);
         eventos = (Button) findViewById(R.id.btnEventos);
+        perfil = (Button) findViewById(R.id.btnPerfil);
         username = findViewById(R.id.text_username);
-        username.setText(getUserName());
 
-
+        username.setText(usuario.getNome());
 
 
         // busca o tipo do usuario no firebase para validar se vai habilitar ou não os botões
-        DocumentReference docRef = db.collection("tipoUsuario").document("gnFS3L7ztIzrqCaBOvTI");
+        DocumentReference docRef = db.collection("tipoUsuario").document(user.getUid());
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -57,13 +62,13 @@ public class TelaPrincipal extends AppCompatActivity {
 
 
         // busca o usuario do banco
-        DocumentReference docReference = db.collection("usuarios").document("taywornath@gmail.com");
-        docReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                usuario = documentSnapshot.toObject(Usuario.class);
-            }
-        });
+//        DocumentReference docReference = db.collection("usuarios").document("taywornath@gmail.com");
+//        docReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                usuario = documentSnapshot.toObject(Usuario.class);
+//            }
+//        });
 
         //se usuario não é admin, esconde os botões de cadastro de evento e membro
         if(tipoUsuario.admin != usuario.getTipoUsuario()) {
@@ -98,6 +103,11 @@ public class TelaPrincipal extends AppCompatActivity {
                 eventos();
             }
         });
+
+        perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { perfil(); }
+        });
     }
 
 
@@ -109,16 +119,6 @@ public class TelaPrincipal extends AppCompatActivity {
                         voltaLogin();
                     }
                 });
-    }
-
-    public String getUserName() {
-        FirebaseUser user = FirebaseServices.getFirebaseAuthInstance().getCurrentUser();
-        String name = "";
-
-        if (user != null) {
-            name = user.getDisplayName();
-        }
-        return user.getDisplayName();
     }
 
     private void rankingJogadores() {
@@ -136,6 +136,12 @@ public class TelaPrincipal extends AppCompatActivity {
 
     private void eventos() {
         Intent intent = new Intent(this, Eventos.class);
+        startActivity(intent);
+    }
+
+
+    private void perfil(){
+        Intent intent = new Intent(this, Perfil.class);
         startActivity(intent);
     }
 

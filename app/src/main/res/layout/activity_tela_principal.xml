@@ -13,10 +13,10 @@
         android:layout_height="227dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.279"
+        app:layout_constraintVertical_bias="0.277"
         app:srcCompat="@drawable/atletico" />
 
     <TextView
@@ -28,22 +28,25 @@
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintVertical_bias="0.055" />
 
     <Button
         android:id="@+id/btnLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:text="@string/txtLogout"
-        app:backgroundTint="@color/MeuOutroVermelho"
+        app:backgroundTint="@color/Branco"
+        app:icon="@drawable/ic_logout_24"
+        app:iconTint="@color/MeuOutroVermelho"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCadastrarMembro"
-        app:layout_constraintVertical_bias="0.466" />
+        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintStart_toEndOf="@+id/textViewBemvindo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.055" />
 
     <Button
         android:id="@+id/btnRanking"
@@ -53,9 +56,10 @@
         app:backgroundTint="@color/MeuOutroVermelho"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewBemvindo"
-        app:layout_constraintVertical_bias="0.566" />
+        app:layout_constraintVertical_bias="0.531" />
 
     <Button
         android:id="@+id/btnCadastrarMembro"
@@ -65,10 +69,9 @@
         app:backgroundTint="@color/MeuOutroVermelho"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.893" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCadastrarEvento"
+        app:layout_constraintVertical_bias="0.352" />
 
     <Button
         android:id="@+id/btnCadastrarEvento"
@@ -104,10 +107,26 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/imageViewBemVindo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.813"
+        app:layout_constraintVertical_bias="0.847"
         tools:text="@string/text_username" />
+
+    <Button
+        android:id="@+id/btnPerfil"
+        android:layout_width="32dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="76dp"
+        android:paddingLeft="0dp"
+        app:backgroundTint="@color/Branco"
+        app:icon="@drawable/ic_account_32"
+        app:iconTint="@color/MeuOutroVermelho"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textViewBemvindo"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.055" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
