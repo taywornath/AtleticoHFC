@@ -11,12 +11,12 @@
         android:id="@+id/imageViewBemVindo"
         android:layout_width="217dp"
         android:layout_height="227dp"
+        android:contentDescription="@string/img_logo_welcome"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.277"
+        app:layout_constraintVertical_bias="0.315"
         app:srcCompat="@drawable/atletico" />
 
     <TextView
@@ -31,7 +31,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.054" />
 
     <Button
         android:id="@+id/btnLogout"
@@ -46,7 +46,7 @@
         app:layout_constraintHorizontal_bias="0.833"
         app:layout_constraintStart_toEndOf="@+id/textViewBemvindo"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.051" />
 
     <Button
         android:id="@+id/btnRanking"
@@ -56,10 +56,10 @@
         app:backgroundTint="@color/MeuOutroVermelho"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewBemvindo"
-        app:layout_constraintVertical_bias="0.531" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.843" />
 
     <Button
         android:id="@+id/btnCadastrarMembro"
@@ -69,9 +69,10 @@
         app:backgroundTint="@color/MeuOutroVermelho"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCadastrarEvento"
-        app:layout_constraintVertical_bias="0.352" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.752" />
 
     <Button
         android:id="@+id/btnCadastrarEvento"
@@ -81,10 +82,9 @@
         app:backgroundTint="@color/MeuOutroVermelho"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.661" />
 
     <Button
         android:id="@+id/btnEventos"
@@ -94,9 +94,10 @@
         app:backgroundTint="@color/MeuOutroVermelho"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.705" />
+        app:layout_constraintVertical_bias="0.929" />
 
     <TextView
         android:id="@+id/text_username"
@@ -107,10 +108,10 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/imageViewBemVindo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.847"
+        app:layout_constraintVertical_bias="0.826"
         tools:text="@string/text_username" />
 
     <Button
@@ -118,7 +119,6 @@
         android:layout_width="32dp"
         android:layout_height="45dp"
         android:layout_marginEnd="76dp"
-        android:paddingLeft="0dp"
         app:backgroundTint="@color/Branco"
         app:icon="@drawable/ic_account_32"
         app:iconTint="@color/MeuOutroVermelho"
@@ -127,6 +127,6 @@
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.051" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
