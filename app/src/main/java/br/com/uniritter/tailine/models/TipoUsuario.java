@@ -2,6 +2,13 @@ package br.com.uniritter.tailine.models;
 
 public class TipoUsuario {
 
+    public TipoUsuario(int membro, int admin) {
+        this.membro = membro;
+        this.admin = admin;
+    }
+
+    public TipoUsuario() { }
+
     public int membro = 1;
     public int admin = 2;
 
