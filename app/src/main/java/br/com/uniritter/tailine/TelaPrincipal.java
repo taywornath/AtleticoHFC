@@ -2,9 +2,11 @@ package br.com.uniritter.tailine;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,10 +24,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import br.com.uniritter.tailine.models.TipoUsuario;
-import br.com.uniritter.tailine.models.Usuario;
 import br.com.uniritter.tailine.services.FirebaseServices;
 
 public class TelaPrincipal extends AppCompatActivity {
+
+    private String nome;
+    private int tipoUsuario;
 
     private Button logout, ranking, cadastrarMembro, eventos, perfil;
     private TextView username;
@@ -32,8 +37,14 @@ public class TelaPrincipal extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseServices.getFirebaseFirestoreInstance();
     private final FirebaseUser user = FirebaseServices.getFirebaseAuthInstance().getCurrentUser();
 
-    private TipoUsuario tipoUsuario;
-    private Usuario usuario = new Usuario(user.getDisplayName(), user.getEmail(), user);
+    private static final String NOME = "nome";
+    private static final String TIPO = "tipoUsuario";
+    private static final String TAG = "TelaPrincipal";
+
+    private CollectionReference colRef = db.collection("usuarios");
+    private DocumentReference docRef = db.collection("usuarios").document(user.getUid());
+
+    private TipoUsuario tipoUsuarioObj = new TipoUsuario(1, 2);
 
 
     @Override
@@ -48,30 +59,10 @@ public class TelaPrincipal extends AppCompatActivity {
         perfil = (Button) findViewById(R.id.btnPerfil);
         username = findViewById(R.id.text_username);
 
-        username.setText(usuario.getNome());
-
-
-        // busca o tipo do usuario no firebase para validar se vai habilitar ou não os botões
-        DocumentReference docRef = db.collection("tipoUsuario").document(user.getUid());
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                tipoUsuario = documentSnapshot.toObject(TipoUsuario.class);
-            }
-        });
-
-
-        // busca o usuario do banco
-//        DocumentReference docReference = db.collection("usuarios").document("taywornath@gmail.com");
-//        docReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//            @Override
-//            public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                usuario = documentSnapshot.toObject(Usuario.class);
-//            }
-//        });
+        getDocument();
 
         //se usuario não é admin, esconde os botões de cadastro de evento e membro
-        if(tipoUsuario.admin != usuario.getTipoUsuario()) {
+        if(tipoUsuario > 0 && tipoUsuario < 3 && tipoUsuario != tipoUsuarioObj.admin) {
             eventos.setVisibility(View.GONE);
             cadastrarMembro.setVisibility(View.GONE);
         }
@@ -110,7 +101,6 @@ public class TelaPrincipal extends AppCompatActivity {
         });
     }
 
-
     private void logout() {
         AuthUI.getInstance()
                 .signOut(this)
@@ -122,6 +112,7 @@ public class TelaPrincipal extends AppCompatActivity {
     }
 
     private void rankingJogadores() {
+
     }
 
     private void cadastrarNovoMembro() {
@@ -139,11 +130,35 @@ public class TelaPrincipal extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     private void perfil(){
         Intent intent = new Intent(this, Perfil.class);
         startActivity(intent);
     }
 
+    public void getDocument() {
+        docRef.get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            nome = documentSnapshot.getString(NOME);
+                            tipoUsuario = Integer.parseInt(documentSnapshot.getString(TIPO));
+
+                            //Map<String, Object> note = documentSnapshot.getData();
+                            username.setText(nome);
+
+                        } else {
+                            Toast.makeText(TelaPrincipal.this, "Usuario não cadastrado", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(TelaPrincipal.this, "Error!", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
 
 }

@@ -11,6 +11,7 @@
         android:theme="@style/Theme.AtleticoHFC">
         <activity android:name=".Perfil" />
         <activity android:name=".CadastrarMembro" />
+        <activity android:name=".CadastroEventos" />
         <activity android:name=".Calendario" />
         <activity android:name=".TelaLogin" />
         <activity android:name=".TelaPrincipal" /> <!-- Activity TelaSplash é a inicial da aplicação -->

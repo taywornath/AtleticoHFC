@@ -23,5 +23,10 @@
     <string name="alterar_email">Alterar E-mail</string>
     <string name="alterar_senha">Alterar Senha</string>
     <string name="img_logo_welcome">img_logo_welcome</string>
+    <string name="txtTituloEvento">Título do Evento</string>
+    <string name="txtDataEvento">Data</string>
+    <string name="txtLocalEvento">Local</string>
+    <string name="txtHoraEvento">Horário</string>
+    <string name="txtNovoEvento">Cadastro de Eventos</string>
 
 </resources>
