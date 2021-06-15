@@ -33,4 +33,6 @@
     <string name="txtTituloMenos">Jogadores menos participativos</string>
     <string name="btnEditaDados">Confirmar</string>
     <string name="btnShare">Enviar via WhatsApp</string>
+    <string name="txtAlertaAlteraSenha">O link para redefinição de senha foi enviado para o seu e-mail!</string>
+
 </resources>

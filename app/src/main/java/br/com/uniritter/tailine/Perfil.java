@@ -46,6 +46,7 @@ public class Perfil extends AppCompatActivity {
     private DocumentReference docRef = db.collection("usuarios").document(user.getUid());
 
     private final Usuario usuario = new Usuario();
+    private AlertDialog alerta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class Perfil extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 usuario.resetaSenha(user);
+                showAlteraSenha();
             }
         });
 
@@ -99,7 +101,6 @@ public class Perfil extends AppCompatActivity {
                 });
     }
 
-
     public void showAlterarNome(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Nome");
@@ -120,4 +121,26 @@ public class Perfil extends AppCompatActivity {
     }
 
 
+    public void showAlteraSenha() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Alterar Senha");
+
+        final View customLayout = getLayoutInflater().inflate(R.layout.layout_altera_senha, null);
+        builder.setView(customLayout);
+        builder.setMessage("O link de redefinição de senha foi enviado para " + user.getEmail());
+        builder.setPositiveButton("Entendi", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick( DialogInterface dialog, int which) {
+                alerta.dismiss();
+            }
+        });
+
+        alerta = builder.create();
+        alerta.show();
+    }
+
+
+
+
 }
+

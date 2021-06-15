@@ -32,6 +32,7 @@ public class TelaPrincipal extends AppCompatActivity {
     private String nome;
     private int tipoUsuario;
 
+
     private Button logout, ranking, cadastrarMembro, eventos, novoEvento, perfil;
     private TextView username;
 
@@ -42,7 +43,6 @@ public class TelaPrincipal extends AppCompatActivity {
     private static final String TIPO = "tipoUsuario";
     private static final String TAG = "TelaPrincipal";
 
-    private CollectionReference colRef = db.collection("usuarios");
     private DocumentReference docRef = db.collection("usuarios").document(user.getUid());
 
     private TipoUsuario tipoUsuarioObj = new TipoUsuario(1, 2);
@@ -62,12 +62,6 @@ public class TelaPrincipal extends AppCompatActivity {
         username = findViewById(R.id.text_username);
 
         getDocument();
-
-        //se usuario não é admin, esconde os botões de cadastro de evento e membro
-        if(tipoUsuario != tipoUsuarioObj.admin) {
-            novoEvento.setVisibility(View.GONE);
-            cadastrarMembro.setVisibility(View.GONE);
-        }
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +104,12 @@ public class TelaPrincipal extends AppCompatActivity {
                 });
     }
 
+    private void defineView(int tipo) {
+        if (tipo != tipoUsuarioObj.admin) {
+            novoEvento.setVisibility(View.GONE);
+            cadastrarMembro.setVisibility(View.GONE);
+        }
+    }
     private void rankingJogadores() {
         Intent intent = new Intent(this, Ranking.class);
         startActivity(intent);
@@ -148,10 +148,8 @@ public class TelaPrincipal extends AppCompatActivity {
                         if (documentSnapshot.exists()) {
                             nome = documentSnapshot.getString(NOME);
                             tipoUsuario = Integer.parseInt(documentSnapshot.getString(TIPO));
-
-                            //Map<String, Object> note = documentSnapshot.getData();
                             username.setText(nome);
-
+                            defineView(tipoUsuario);
                         } else {
                             Toast.makeText(TelaPrincipal.this, "Usuario não cadastrado", Toast.LENGTH_SHORT).show();
                         }
