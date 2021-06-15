@@ -105,7 +105,7 @@ public class TelaPrincipal extends AppCompatActivity {
     }
 
     private void defineView(int tipo) {
-        if (tipo != tipoUsuarioObj.admin) {
+        if (tipo == tipoUsuarioObj.membro) {
             novoEvento.setVisibility(View.GONE);
             cadastrarMembro.setVisibility(View.GONE);
         }
