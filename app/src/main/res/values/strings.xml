@@ -21,6 +21,7 @@
     <string name="menores">Menores</string>
     <string name="maiores">Maiores</string>
     <string name="alterar_email">Alterar E-mail</string>
+    <string name="alterar_nome">Alterar Nome</string>
     <string name="alterar_senha">Alterar Senha</string>
     <string name="img_logo_welcome">img_logo_welcome</string>
     <string name="txtTituloEvento">Título do Evento</string>
@@ -28,5 +29,8 @@
     <string name="txtLocalEvento">Local</string>
     <string name="txtHoraEvento">Horário</string>
     <string name="txtNovoEvento">Cadastro de Eventos</string>
-
+    <string name="txtTituloMais">Jogadores mais participativos</string>
+    <string name="txtTituloMenos">Jogadores menos participativos</string>
+    <string name="btnEditaDados">Confirmar</string>
+    <string name="btnShare">Enviar via WhatsApp</string>
 </resources>

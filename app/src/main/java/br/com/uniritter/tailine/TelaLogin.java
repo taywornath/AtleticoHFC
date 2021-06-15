@@ -30,12 +30,12 @@ public class TelaLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        user = FirebaseAuth.getInstance().getCurrentUser();
-//        if (user != null) {
-//            gotoTelaPrincipal();
-//        } else {
-//            // No user is signed in
-//        }
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            gotoTelaPrincipal();
+        } else {
+            // No user is signed in
+        }
 
         mAuth = FirebaseAuth.getInstance();
         botaoLogin = findViewById(R.id.btnLogin);
@@ -45,7 +45,7 @@ public class TelaLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 List<AuthUI.IdpConfig> providers = Arrays.asList(
-                        new AuthUI.IdpConfig.EmailBuilder().build()
+                        new AuthUI.IdpConfig.EmailBuilder().setAllowNewAccounts(false).build()
                 );
 
                 // Create and launch sign-in intent

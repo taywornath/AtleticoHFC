@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -98,7 +99,19 @@ public class CadastrarMembro extends AppCompatActivity {
         user.put("UID", id);
         user.put("tipoUsuario", tipo);
         user.put("nome", nome);
-        usuarios.document(id).set(user);
+        usuarios.document(id).set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Cadastro efetuado com sucesso! \n ");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Erro no cadastro. Tente novamente.", e);
+                    }
+                });
     }
 
     private void createAccount(String email, String password) {
@@ -109,6 +122,7 @@ public class CadastrarMembro extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail:success");
                             cadastraNovoUsuario(mAuth.getUid(), tipoUsuario, editNome.getText().toString());
+                            mAuth.sendPasswordResetEmail(editEmail.getText().toString());
                             Toast.makeText(CadastrarMembro.this, "Cadastro realizado com sucesso.",
                                     Toast.LENGTH_SHORT).show();
                             voltaParaMenu();
@@ -124,4 +138,5 @@ public class CadastrarMembro extends AppCompatActivity {
     }
 
     public void reload() { }
+
 }

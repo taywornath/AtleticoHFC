@@ -14,11 +14,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,6 +75,7 @@ public class CadastroEventos extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+                        novoDocPresenca(documentReference.getId());
                         Log.d(TAG, "Cadastro efetuado com sucesso! \n " + documentReference.getId());
                         reload();
                         voltaParaMenu();
@@ -84,6 +88,30 @@ public class CadastroEventos extends AppCompatActivity {
                     }
                 });
     }
+
+
+    public void novoDocPresenca(String id){
+        CollectionReference frequencia = db.collection("frequencia");
+
+        // Cria novo documento, cujo ID é o mesmo que o UID do usuário
+        Map<String, Object> attendance = new HashMap<>();
+        attendance.put("idEvento", id);
+        attendance.put("jogadores", Arrays.asList());
+        frequencia.document(id).set(attendance)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                      Log.d(TAG, "Documento gerado com sucesso! \n ");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Erro no cadastro. Tente novamente.", e);
+                    }
+                });
+    }
+
 
     private void voltaParaMenu() {
         Intent intent = new Intent(this, TelaPrincipal.class);
