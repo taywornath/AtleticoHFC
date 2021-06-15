@@ -32,7 +32,6 @@ public class TelaPrincipal extends AppCompatActivity {
     private String nome;
     private int tipoUsuario;
 
-
     private Button logout, ranking, cadastrarMembro, eventos, novoEvento, perfil;
     private TextView username;
 
@@ -94,6 +93,37 @@ public class TelaPrincipal extends AppCompatActivity {
         });
     }
 
+    private void defineView(int tipo) {
+        if (tipo == tipoUsuarioObj.membro) {
+            novoEvento.setVisibility(View.GONE);
+            cadastrarMembro.setVisibility(View.GONE);
+        }
+    }
+
+    public void getDocument() {
+        docRef.get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            nome = documentSnapshot.getString(NOME);
+                            tipoUsuario = Integer.parseInt(documentSnapshot.get(TIPO).toString());
+                            username.setText(nome);
+                            defineView(tipoUsuario);
+                        } else {
+                            Toast.makeText(TelaPrincipal.this, "Usuario não cadastrado", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(TelaPrincipal.this, "Error!", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+
     private void logout() {
         AuthUI.getInstance()
                 .signOut(this)
@@ -104,12 +134,11 @@ public class TelaPrincipal extends AppCompatActivity {
                 });
     }
 
-    private void defineView(int tipo) {
-        if (tipo == tipoUsuarioObj.membro) {
-            novoEvento.setVisibility(View.GONE);
-            cadastrarMembro.setVisibility(View.GONE);
-        }
+    private void perfil(){
+        Intent intent = new Intent(this, Perfil.class);
+        startActivity(intent);
     }
+
     private void rankingJogadores() {
         Intent intent = new Intent(this, Ranking.class);
         startActivity(intent);
@@ -130,38 +159,11 @@ public class TelaPrincipal extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void perfil(){
-        Intent intent = new Intent(this, Perfil.class);
-        startActivity(intent);
-    }
-
     private void cadastrarEvento(){
         Intent intent = new Intent(this, CadastroEventos.class);
         startActivity(intent);
     }
 
-    public void getDocument() {
-        docRef.get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            nome = documentSnapshot.getString(NOME);
-                            tipoUsuario = Integer.parseInt(documentSnapshot.getString(TIPO));
-                            username.setText(nome);
-                            defineView(tipoUsuario);
-                        } else {
-                            Toast.makeText(TelaPrincipal.this, "Usuario não cadastrado", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(TelaPrincipal.this, "Error!", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, e.toString());
-                    }
-                });
-    }
+
 
 }
