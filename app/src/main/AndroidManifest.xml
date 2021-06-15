@@ -4,20 +4,25 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/atletico"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AtleticoHFC">
+        android:theme="@style/Theme.AtleticoHFC" >
+        <activity android:name=".Ranking" />
+        <activity android:name=".MenoresFrequencias" />
+        <activity android:name=".MaioresFrequencias" />
         <activity android:name=".Perfil" />
         <activity android:name=".CadastrarMembro" />
         <activity android:name=".CadastroEventos" />
+        <activity android:name=".Eventos" />
         <activity android:name=".Calendario" />
         <activity android:name=".TelaLogin" />
         <activity android:name=".TelaPrincipal" /> <!-- Activity TelaSplash é a inicial da aplicação -->
         <activity android:name=".TelaSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

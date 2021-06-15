@@ -24,6 +24,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import br.com.uniritter.tailine.models.TipoUsuario;
+import br.com.uniritter.tailine.models.Usuario;
 import br.com.uniritter.tailine.services.FirebaseServices;
 
 public class TelaPrincipal extends AppCompatActivity {
@@ -31,7 +32,7 @@ public class TelaPrincipal extends AppCompatActivity {
     private String nome;
     private int tipoUsuario;
 
-    private Button logout, ranking, cadastrarMembro, eventos, perfil;
+    private Button logout, ranking, cadastrarMembro, eventos, novoEvento, perfil;
     private TextView username;
 
     private final FirebaseFirestore db = FirebaseServices.getFirebaseFirestoreInstance();
@@ -56,48 +57,46 @@ public class TelaPrincipal extends AppCompatActivity {
         ranking = (Button) findViewById(R.id.btnRanking);
         cadastrarMembro = (Button) findViewById(R.id.btnCadastrarMembro);
         eventos = (Button) findViewById(R.id.btnEventos);
+        novoEvento = (Button) findViewById(R.id.btnCadastrarEvento);
         perfil = (Button) findViewById(R.id.btnPerfil);
         username = findViewById(R.id.text_username);
 
         getDocument();
 
         //se usuario não é admin, esconde os botões de cadastro de evento e membro
-        if(tipoUsuario > 0 && tipoUsuario < 3 && tipoUsuario != tipoUsuarioObj.admin) {
-            eventos.setVisibility(View.GONE);
+        if(tipoUsuario != tipoUsuarioObj.admin) {
+            novoEvento.setVisibility(View.GONE);
             cadastrarMembro.setVisibility(View.GONE);
         }
 
-
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                logout();
-            }
+            public void onClick(View v) { logout(); }
         });
 
         cadastrarMembro.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                cadastrarNovoMembro();
-            }
-        });
-
-        ranking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
+            public void onClick(View v) { cadastrarNovoMembro(); }
         });
 
         eventos.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                eventos();
-            }
+            public void onClick(View v) { eventos();  }
+        });
+
+        novoEvento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { cadastrarEvento();  }
         });
 
         perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { perfil(); }
+        });
+
+        ranking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { rankingJogadores(); }
         });
     }
 
@@ -112,7 +111,8 @@ public class TelaPrincipal extends AppCompatActivity {
     }
 
     private void rankingJogadores() {
-
+        Intent intent = new Intent(this, Ranking.class);
+        startActivity(intent);
     }
 
     private void cadastrarNovoMembro() {
@@ -120,7 +120,7 @@ public class TelaPrincipal extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void voltaLogin() {
+    private void voltaLogin(){
         Intent intent = new Intent(this, TelaLogin.class);
         startActivity(intent);
     }
@@ -132,6 +132,11 @@ public class TelaPrincipal extends AppCompatActivity {
 
     private void perfil(){
         Intent intent = new Intent(this, Perfil.class);
+        startActivity(intent);
+    }
+
+    private void cadastrarEvento(){
+        Intent intent = new Intent(this, CadastroEventos.class);
         startActivity(intent);
     }
 
