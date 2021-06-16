@@ -136,8 +136,4 @@ public class CadastrarMembro extends AppCompatActivity {
     }
 
     public void reload() { }
-
-    private void updateUI(FirebaseUser user) {
-
-    }
 }
