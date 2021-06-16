@@ -30,19 +30,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.052" />
 
-    <ImageView
-        android:id="@+id/img_eventos"
-        android:layout_width="282dp"
-        android:layout_height="331dp"
-        android:contentDescription="@string/img_logo"
-        app:layout_constraintBottom_toTopOf="@+id/txt_frequentadores"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textWelcomeLogin"
-        app:layout_constraintVertical_bias="0.41"
-        tools:src="@drawable/atletico"
-        tools:srcCompat="@drawable/atletico" />
+
 
     <Button
         android:id="@+id/btn_maiores"
@@ -95,5 +83,29 @@
         app:layout_constraintStart_toEndOf="@+id/btn_maiores"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.762" />
+
+    <CalendarView
+        android:id="@+id/cv_eventos"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:maxDate="12/31/2021"
+        android:minDate="01/01/2021"
+        app:layout_constraintBottom_toTopOf="@+id/txt_frequentadores"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textWelcomeLogin"
+        app:layout_constraintVertical_bias="0.305" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="proxEventos"
+        app:srcCompat="@android:drawable/list_selector_background"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-3dp"
+        tools:srcCompat="?android:attr/fingerprintAuthDrawable" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
