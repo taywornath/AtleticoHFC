@@ -47,7 +47,7 @@ public class CadastrarMembro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_member);
 
-        mAuth = FirebaseAuth.getInstance();
+        
 
         editNome = findViewById(R.id.newMemberName);
         editEmail = findViewById(R.id.newMemberMail);
@@ -115,6 +115,7 @@ public class CadastrarMembro extends AppCompatActivity {
     }
 
     private void createAccount(String email, String password) {
+        mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
