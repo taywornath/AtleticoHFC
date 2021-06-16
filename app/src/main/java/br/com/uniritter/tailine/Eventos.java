@@ -7,16 +7,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -24,46 +27,46 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.Array;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import br.com.uniritter.tailine.services.FirebaseServices;
 
 public class Eventos extends AppCompatActivity {
 
-    private Button maiores, menores, share;
-    private TextView frequentadores, eventos;
-    private CalendarView logo;
+    private Button share;
+    private TextView eventos;
+    private CalendarView calendar;
     private CheckBox checkBox;
 
+    private String idEvento;
     private Boolean presenca;
 
     private FirebaseFirestore db = FirebaseServices.getFirebaseFirestoreInstance();
     private final FirebaseUser user = FirebaseServices.getFirebaseAuthInstance().getCurrentUser();
     private static final String TAG = "CadastroEvento";
     private static final String TAG1 = "Calendario";
+
+    private DocumentSnapshot documentSnapshot;
+    private DocumentReference docRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventos);
 
-        frequentadores = findViewById(R.id.txt_frequentadores);
         eventos = findViewById(R.id.textWelcomeLogin);
-        maiores = (Button) findViewById(R.id.btn_maiores);
-        checkBox = findViewById(R.id.checkBox);
         share = (Button) findViewById(R.id.btnShare);
-        logo = (CalendarView) findViewById(R.id.cv_eventos);
+        calendar = (CalendarView) findViewById(R.id.cv_eventos);
 
-        //logo.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v){ calendario(); }
-        //});
-
-        logo.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 String date = dayOfMonth + "/" + (month + 1) + "/" + year;//da uma olhada se não precisa mais um.
                 Log.d(TAG1, "onSelectDayChange: dd/mm/yyyy: " + date);
-
-
-
 
                 Intent intent = new Intent(Eventos.this, Calendario.class);
                 intent.putExtra("date", date);
@@ -77,36 +80,6 @@ public class Eventos extends AppCompatActivity {
                 shareContent();
             }
         });
-
-        checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCheckboxClicked(v);
-            }
-        });
-    }
-
-    public void onCheckboxClicked(View view) {
-        boolean checked = ((CheckBox) view).isChecked();
-        DocumentReference attendance = db.collection("frequencia").document("qRvJkrgw03Ug5YOg7bre");
-
-        switch(view.getId()) {
-            case R.id.checkBox:
-                if (checked) {
-                    presenca = true;
-                    attendance.update("jogadores", FieldValue.arrayUnion(user.getUid()));
-                } else {
-                    presenca = false;
-                    attendance.update("jogadores", FieldValue.arrayRemove(user.getUid()));
-                    break;
-                }
-        }
-    }
-
-
-    private void calendario() {
-        Intent intent = new Intent(this, Calendario.class);
-        startActivity(intent);
     }
 
     private void shareContent(){
@@ -139,6 +112,7 @@ public class Eventos extends AppCompatActivity {
 
 
     }
+
 
 
 }

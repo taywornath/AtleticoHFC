@@ -7,22 +7,13 @@
     tools:context=".Eventos">
 
     <TextView
-        android:id="@+id/txt_frequentadores"
-        android:layout_width="243dp"
-        android:layout_height="45dp"
-        android:text="@string/frequentadores"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.66" />
-
-    <TextView
         android:id="@+id/textWelcomeLogin"
         android:layout_width="138dp"
         android:layout_height="48dp"
         android:text="@string/eventos"
+        android:textAlignment="center"
+        android:textColor="@color/meOutroAzul"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -31,71 +22,31 @@
         app:layout_constraintVertical_bias="0.052" />
 
 
-
-    <Button
-        android:id="@+id/btn_maiores"
-        android:layout_width="154dp"
-        android:layout_height="54dp"
-        android:layout_marginBottom="156dp"
-        android:text="@string/maiores"
-        app:backgroundTint="@color/MeuOutroVermelho"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_frequentadores"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/btn_menores"
-        android:layout_width="154dp"
-        android:layout_height="54dp"
-        android:text="@string/menores"
-        app:backgroundTint="@color/MeuOutroVermelho"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_maiores"
-        app:layout_constraintVertical_bias="0.235" />
-
     <Button
         android:id="@+id/btnShare"
         android:layout_width="156dp"
         android:layout_height="51dp"
+        android:layout_marginBottom="156dp"
         android:text="@string/btnShare"
         app:backgroundTint="@color/MeuOutroVermelho"
         app:iconTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_menores"
-        app:layout_constraintVertical_bias="0.529" />
-
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="CheckBox"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_maiores"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.762" />
+        app:layout_constraintTop_toBottomOf="@+id/cv_eventos"
+        app:layout_constraintVertical_bias="1.0" />
 
     <CalendarView
         android:id="@+id/cv_eventos"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:maxDate="12/31/2021"
         android:minDate="01/01/2021"
-        app:layout_constraintBottom_toTopOf="@+id/txt_frequentadores"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textWelcomeLogin"
-        app:layout_constraintVertical_bias="0.305" />
+        app:layout_constraintTop_toBottomOf="@+id/textWelcomeLogin" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton2"

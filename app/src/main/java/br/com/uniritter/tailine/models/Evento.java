@@ -15,9 +15,6 @@ public class Evento {
     private boolean lido;
     private Usuario objUser;
 
-
-
-
     public Evento() {
         super();
     }
@@ -102,7 +99,6 @@ public class Evento {
         this.objUser = objUser;
     }
 
-
     public String toString() {
         return "Nome: "+this.nome+"\n"+
                 "Horario: "+this.horario+"\n+" +
@@ -111,4 +107,6 @@ public class Evento {
 
                 this.mensagem+"\n"+"\n";
     }
+
+
 }
