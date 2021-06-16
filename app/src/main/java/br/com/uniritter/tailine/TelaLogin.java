@@ -31,11 +31,11 @@ public class TelaLogin extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            gotoTelaPrincipal();
-        } else {
-            // No user is signed in
-        }
+//        if (user != null) {
+//            gotoTelaPrincipal();
+//        } else {
+//            // No user is signed in
+//        }
 
         mAuth = FirebaseAuth.getInstance();
         botaoLogin = findViewById(R.id.btnLogin);

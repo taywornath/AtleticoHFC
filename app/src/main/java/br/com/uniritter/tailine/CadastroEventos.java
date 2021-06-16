@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class CadastroEventos extends AppCompatActivity {
     private EditText nome, data, local, horario;
 
     private Button btnCadastro;
+
 
     private static final String NAME_KEY = "nome";
     private static final String DATE_KEY = "data";

@@ -45,43 +45,24 @@
         tools:srcCompat="@drawable/atletico" />
 
     <Button
-        android:id="@+id/btn_maiores"
-        android:layout_width="154dp"
-        android:layout_height="54dp"
-        android:layout_marginBottom="156dp"
-        android:text="@string/maiores"
-        app:backgroundTint="@color/MeuOutroVermelho"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_frequentadores"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/btn_menores"
-        android:layout_width="154dp"
-        android:layout_height="54dp"
-        android:text="@string/menores"
-        app:backgroundTint="@color/MeuOutroVermelho"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_maiores"
-        app:layout_constraintVertical_bias="0.235" />
-
-    <Button
         android:id="@+id/btnShare"
         android:layout_width="156dp"
         android:layout_height="51dp"
+        android:layout_marginBottom="100dp"
         android:text="@string/btnShare"
         app:backgroundTint="@color/MeuOutroVermelho"
         app:iconTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_menores"
-        app:layout_constraintVertical_bias="0.529" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="523dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
