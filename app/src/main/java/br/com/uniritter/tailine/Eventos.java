@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +22,9 @@ public class Eventos extends AppCompatActivity {
     private Button maiores, menores, share;
     private TextView frequentadores, eventos;
     private ImageView logo;
+    private CheckBox checkBox;
+
+    private Boolean presenca;
 
     private FirebaseFirestore db = FirebaseServices.getFirebaseFirestoreInstance();
     private final FirebaseUser user = FirebaseServices.getFirebaseAuthInstance().getCurrentUser();
@@ -33,7 +37,7 @@ public class Eventos extends AppCompatActivity {
         frequentadores = findViewById(R.id.txt_frequentadores);
         eventos = findViewById(R.id.textWelcomeLogin);
         maiores = (Button) findViewById(R.id.btn_maiores);
-        menores = (Button) findViewById(R.id.btn_menores);
+        checkBox = findViewById(R.id.checkBox);
         share = (Button) findViewById(R.id.btnShare);
         logo = (ImageView) findViewById(R.id.img_eventos);
 
@@ -42,37 +46,36 @@ public class Eventos extends AppCompatActivity {
             public void onClick(View v){ calendario(); }
         });
 
-        maiores.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    confirmaPresenca();
-            }
-        });
-
-        menores.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                retirarPresenca();
-            }
-        });
-
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 shareContent();
             }
         });
+
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCheckboxClicked(v);
+            }
+        });
     }
 
-
-    public void confirmaPresenca(){
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
         DocumentReference attendance = db.collection("frequencia").document("qRvJkrgw03Ug5YOg7bre");
-        attendance.update("jogadores", FieldValue.arrayUnion(user.getUid()));
-    }
 
-    public void retirarPresenca(){
-        DocumentReference attendance = db.collection("frequencia").document("qRvJkrgw03Ug5YOg7bre");
-        attendance.update("jogadores", FieldValue.arrayRemove(user.getUid()));
+        switch(view.getId()) {
+            case R.id.checkBox:
+                if (checked) {
+                    presenca = true;
+                    attendance.update("jogadores", FieldValue.arrayUnion(user.getUid()));
+                } else {
+                    presenca = false;
+                    attendance.update("jogadores", FieldValue.arrayRemove(user.getUid()));
+                    break;
+                }
+        }
     }
 
 

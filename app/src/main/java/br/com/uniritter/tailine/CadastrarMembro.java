@@ -41,13 +41,14 @@ public class CadastrarMembro extends AppCompatActivity {
     private static final String TAG = "CadastrarMembro";
     private final FirebaseFirestore db = FirebaseServices.getFirebaseFirestoreInstance();
     private FirebaseAuth mAuth;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_member);
 
-        
+        mAuth = FirebaseAuth.getInstance();
 
         editNome = findViewById(R.id.newMemberName);
         editEmail = findViewById(R.id.newMemberMail);
@@ -66,7 +67,7 @@ public class CadastrarMembro extends AppCompatActivity {
                     } else if (admin.isChecked()){
                         tipoUsuario = 2;
                     } else {
-                        Toast.makeText(getApplicationContext(),
+                        Toast.makeText(CadastrarMembro.this,
                                 "Informe o tipo de usuário", Toast.LENGTH_LONG).show();
                     }
 
@@ -80,14 +81,12 @@ public class CadastrarMembro extends AppCompatActivity {
         });
     }
 
+    public void OnStart(){
+        user = FirebaseServices.getFirebaseAuthInstance().getCurrentUser();
+    }
 
     private void voltaParaMenu() {
         Intent intent = new Intent(this, TelaPrincipal.class);
-        startActivity(intent);
-    }
-
-    private void voltaParaLogin() {
-        Intent intent = new Intent(this, TelaLogin.class);
         startActivity(intent);
     }
 
@@ -95,15 +94,16 @@ public class CadastrarMembro extends AppCompatActivity {
         CollectionReference usuarios = db.collection("usuarios");
 
         // Cria novo documento, cujo ID é o mesmo que o UID do usuário
-        Map<String, Object> user = new HashMap<>();
-        user.put("UID", id);
-        user.put("tipoUsuario", tipo);
-        user.put("nome", nome);
-        usuarios.document(id).set(user)
+        Map<String, Object> userObj = new HashMap<>();
+        userObj.put("UID", id);
+        userObj.put("tipoUsuario", tipo);
+        userObj.put("nome", nome);
+        usuarios.document(id).set(userObj)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "Cadastro efetuado com sucesso! \n ");
+                        voltaParaMenu();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -115,19 +115,16 @@ public class CadastrarMembro extends AppCompatActivity {
     }
 
     private void createAccount(String email, String password) {
-        mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "createUserWithEmail:success");
                             cadastraNovoUsuario(mAuth.getUid(), tipoUsuario, editNome.getText().toString());
-                            mAuth.sendPasswordResetEmail(editEmail.getText().toString());
                             Toast.makeText(CadastrarMembro.this, "Cadastro realizado com sucesso.",
                                     Toast.LENGTH_SHORT).show();
                             voltaParaMenu();
-
+                            mAuth.updateCurrentUser(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -139,5 +136,4 @@ public class CadastrarMembro extends AppCompatActivity {
     }
 
     public void reload() { }
-
 }
